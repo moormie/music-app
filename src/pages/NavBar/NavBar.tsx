@@ -28,7 +28,7 @@ export const NavBar: FC = () => {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
       <Container>
         <Navbar.Brand>
-          <b>FINN music</b>
+          <b>VS music</b>
         </Navbar.Brand>
         <Nav className="flex-grow-1 flex-row">
           <Nav.Item className="me-2 me-lg-3">

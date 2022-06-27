@@ -1,6 +1,6 @@
 {
-  "short_name": "FINN music",
-  "name": "FINN music",
+  "short_name": "music-app",
+  "name": "music-app",
   "icons": [
     {
       "src": "favicon.ico",
