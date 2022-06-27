@@ -1,0 +1,12 @@
+@media (max-width: 800px) {
+  .category-card-container {
+    overflow-y: auto;
+  }
+  .category-card-row {
+    width: 1170px;
+  }
+}
+
+.clear-all-text {
+  cursor: pointer;
+}

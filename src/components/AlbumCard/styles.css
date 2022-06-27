@@ -1,0 +1,16 @@
+.album-card {
+  width: 180px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.album-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
+}
+.album-image {
+  cursor: pointer;
+}
+
+.album-icon:hover {
+  color: rgb(33, 37, 41);
+  cursor: pointer;
+}

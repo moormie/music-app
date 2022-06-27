@@ -1,0 +1,16 @@
+.heart-icon-container {
+  width: 24px;
+}
+
+.heart-icon {
+  color: rgb(108, 117, 125);
+}
+
+.heart-icon:hover {
+  color: rgb(33, 37, 41);
+  cursor: pointer;
+}
+
+.more-button::after {
+  display: none !important;
+}

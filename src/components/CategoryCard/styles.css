@@ -1,0 +1,12 @@
+.category-card {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  cursor: pointer;
+  text-align: center;
+  width: 180px;
+}
+
+.category-card-img {
+  object-fit: cover;
+  width: 50px !important;
+  height: 50px;
+}

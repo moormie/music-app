@@ -1,0 +1,12 @@
+.album-detail-modal-close-container {
+  z-index: 10;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+}
+
+.album-detail-modal-image {
+  padding: 8px;
+  border-radius: 16px;
+  max-width: 100%;
+}
