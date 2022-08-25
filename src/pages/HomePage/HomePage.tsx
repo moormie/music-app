@@ -4,14 +4,20 @@ import { AlbumCardList } from "../../components/AlbumCardList";
 import { CategoryCardList } from "../../components/CategoryCardList";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import { useAlbumListContext } from "../../contexts/AlbumListContext";
-import { useSearchContext } from "../../contexts/SearchContext";
+import { useSortingContext } from "../../contexts/SortingContext";
 import { getFilteredAlbumList } from "../../helpers/filterAlbumList";
 import { getSortedAlbumList } from "../../helpers/sortingAlbumList";
 import { AlbumData } from "../../types/AlbumData";
 
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/index";
+
 export const HomePage: FC = () => {
   const { albumList, categoryList, loading } = useAlbumListContext();
-  const { searchedValue, orderValue } = useSearchContext();
+  const { orderValue } = useSortingContext();
+  const { value: searchedValue } = useSelector(
+    (state: RootState) => state.search
+  );
 
   const [filteredAlbums, setFilteredAlbums] = useState<AlbumData[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -20,10 +26,10 @@ export const HomePage: FC = () => {
     const filteredList = getFilteredAlbumList(
       searchedValue,
       selectedCategories,
-      albumList,
+      albumList
     );
     setFilteredAlbums(
-      getSortedAlbumList(orderValue as keyof AlbumData, filteredList),
+      getSortedAlbumList(orderValue as keyof AlbumData, filteredList)
     );
   }, [searchedValue, albumList, selectedCategories, orderValue]);
 
@@ -41,7 +47,7 @@ export const HomePage: FC = () => {
         setSelectedCategories([]);
       }
     },
-    [selectedCategories],
+    [selectedCategories]
   );
 
   return loading ? (

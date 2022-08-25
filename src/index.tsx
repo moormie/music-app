@@ -8,23 +8,28 @@ import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AlbumListProvider } from "./contexts/AlbumListContext";
 import { FavoriteAlbumListProvider } from "./contexts/FavoriteAlbumListContext";
-import { SearchContextProvider } from "./contexts/SearchContext";
+import { SortingContextProvider } from "./contexts/SortingContext";
+
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <SearchContextProvider>
-        <AlbumListProvider>
-          <FavoriteAlbumListProvider>
-            <App />
-          </FavoriteAlbumListProvider>
-        </AlbumListProvider>
-      </SearchContextProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+    <Provider store={store}>
+      <BrowserRouter>
+        <SortingContextProvider>
+          <AlbumListProvider>
+            <FavoriteAlbumListProvider>
+              <App />
+            </FavoriteAlbumListProvider>
+          </AlbumListProvider>
+        </SortingContextProvider>
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

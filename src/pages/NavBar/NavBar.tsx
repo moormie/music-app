@@ -1,8 +1,12 @@
 import { FC } from "react";
 import { Navbar, Container, Nav, Form, NavDropdown } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { ROUTES_FAVORITES, ROUTES_HOME } from "../../App";
-import { useSearchContext } from "../../contexts/SearchContext";
+import { useSortingContext } from "../../contexts/SortingContext";
+import { RootState } from "../../store";
+import { searchActions } from "../../store/search";
 
 const orderTypes: { [key: string]: string } = {
   artist: "Artist Name",
@@ -12,8 +16,17 @@ const orderTypes: { [key: string]: string } = {
 };
 
 export const NavBar: FC = () => {
-  const { searchedValue, searchHandler, orderValue, orderHandler } =
-    useSearchContext();
+  const { orderValue, orderHandler } = useSortingContext();
+
+  const dispatch = useDispatch();
+
+  const { value: searchedValue } = useSelector(
+    (state: RootState) => state.search
+  );
+
+  const searchHandler = (value: string) => {
+    dispatch(searchActions.search(value));
+  };
 
   const location = useLocation();
   const { pathname: currentPath } = location;
@@ -39,14 +52,18 @@ export const NavBar: FC = () => {
           <Nav.Item className="me-2 me-lg-3">
             <Link
               className={getClassName(ROUTES_FAVORITES)}
-              to={ROUTES_FAVORITES}>
+              to={ROUTES_FAVORITES}
+            >
               Favorites
             </Link>
           </Nav.Item>
         </Nav>
         {currentPath === ROUTES_HOME && (
           <>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" className="mb-2"/>
+            <Navbar.Toggle
+              aria-controls="responsive-navbar-nav"
+              className="mb-2"
+            />
             <Navbar.Collapse>
               <Nav className="flex-grow-1 me-3">
                 <Form.Control
@@ -63,7 +80,8 @@ export const NavBar: FC = () => {
                   onSelect={(e) => orderHandler(e)}
                   menuVariant="dark"
                   align="end"
-                  className="text-center">
+                  className="text-center"
+                >
                   {Object.keys(orderTypes).map((type) => (
                     <NavDropdown.Item eventKey={type} key={type}>
                       {orderTypes[type]}
