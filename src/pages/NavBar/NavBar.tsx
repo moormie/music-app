@@ -4,28 +4,25 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { ROUTES_FAVORITES, ROUTES_HOME } from "../../App";
-import { useSortingContext } from "../../contexts/SortingContext";
 import { RootState } from "../../store";
 import { searchActions } from "../../store/search";
-
-const orderTypes: { [key: string]: string } = {
-  artist: "Artist Name",
-  name: "Album Title",
-  priceAmount: "Price Lowest",
-  releaseDate: "Release date",
-};
+import { sortActions } from "../../store/sort";
+import { OrderKey, orderTypes } from "../../types/OrderTypes";
 
 export const NavBar: FC = () => {
-  const { orderValue, orderHandler } = useSortingContext();
-
   const dispatch = useDispatch();
 
+  const { value: orderValue } = useSelector((state: RootState) => state.sort);
   const { value: searchedValue } = useSelector(
     (state: RootState) => state.search
   );
 
   const searchHandler = (value: string) => {
     dispatch(searchActions.search(value));
+  };
+
+  const orderHandler = (value: string | null) => {
+    dispatch(sortActions.sort(value as OrderKey));
   };
 
   const location = useLocation();
@@ -76,7 +73,7 @@ export const NavBar: FC = () => {
               </Nav>
               <Nav>
                 <NavDropdown
-                  title={orderValue ? orderTypes[orderValue] : "Order By"}
+                  title={orderValue ? orderTypes[orderValue as OrderKey] : "Order By"}
                   onSelect={(e) => orderHandler(e)}
                   menuVariant="dark"
                   align="end"
@@ -84,7 +81,7 @@ export const NavBar: FC = () => {
                 >
                   {Object.keys(orderTypes).map((type) => (
                     <NavDropdown.Item eventKey={type} key={type}>
-                      {orderTypes[type]}
+                      {orderTypes[type as OrderKey]}
                     </NavDropdown.Item>
                   ))}
                 </NavDropdown>

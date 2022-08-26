@@ -4,7 +4,6 @@ import { AlbumCardList } from "../../components/AlbumCardList";
 import { CategoryCardList } from "../../components/CategoryCardList";
 import { LoadingIndicator } from "../../components/LoadingIndicator";
 import { useAlbumListContext } from "../../contexts/AlbumListContext";
-import { useSortingContext } from "../../contexts/SortingContext";
 import { getFilteredAlbumList } from "../../helpers/filterAlbumList";
 import { getSortedAlbumList } from "../../helpers/sortingAlbumList";
 import { AlbumData } from "../../types/AlbumData";
@@ -14,7 +13,7 @@ import { RootState } from "../../store/index";
 
 export const HomePage: FC = () => {
   const { albumList, categoryList, loading } = useAlbumListContext();
-  const { orderValue } = useSortingContext();
+  const { value: orderValue } = useSelector((state: RootState) => state.sort);
   const { value: searchedValue } = useSelector(
     (state: RootState) => state.search
   );

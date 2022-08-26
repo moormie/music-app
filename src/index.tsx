@@ -8,7 +8,6 @@ import { BrowserRouter } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AlbumListProvider } from "./contexts/AlbumListContext";
 import { FavoriteAlbumListProvider } from "./contexts/FavoriteAlbumListContext";
-import { SortingContextProvider } from "./contexts/SortingContext";
 
 import { Provider } from "react-redux";
 import { store } from "./store";
@@ -20,13 +19,11 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <SortingContextProvider>
           <AlbumListProvider>
             <FavoriteAlbumListProvider>
               <App />
             </FavoriteAlbumListProvider>
           </AlbumListProvider>
-        </SortingContextProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
