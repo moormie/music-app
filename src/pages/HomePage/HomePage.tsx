@@ -8,13 +8,15 @@ import { getFilteredAlbumList } from "../../helpers/filterAlbumList";
 import { getSortedAlbumList } from "../../helpers/sortingAlbumList";
 import { AlbumData } from "../../types/AlbumData";
 
-import { useSelector } from "react-redux";
 import { RootState } from "../../store/index";
+import { useAppSelector } from "../../hooks/hooks";
 
 export const HomePage: FC = () => {
   const { albumList, categoryList, loading } = useAlbumListContext();
-  const { value: orderValue } = useSelector((state: RootState) => state.sort);
-  const { value: searchedValue } = useSelector(
+  const { value: orderValue } = useAppSelector(
+    (state: RootState) => state.sort
+  );
+  const { value: searchedValue } = useAppSelector(
     (state: RootState) => state.search
   );
 

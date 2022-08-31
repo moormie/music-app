@@ -1,6 +1,8 @@
 export type OrderKey = "artist" | "name" | "priceAmount" | "releaseDate";
 
-export const orderTypes: Record<OrderKey, string> = {
+type OrderValue = string;
+
+export const orderTypes: Record<OrderKey, OrderValue> = {
   artist: "Artist Name",
   name: "Album Title",
   priceAmount: "Price Lowest",

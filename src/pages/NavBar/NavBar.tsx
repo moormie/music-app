@@ -1,19 +1,20 @@
 import { FC } from "react";
 import { Navbar, Container, Nav, Form, NavDropdown } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { ROUTES_FAVORITES, ROUTES_HOME } from "../../App";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { RootState } from "../../store";
 import { searchActions } from "../../store/search";
 import { sortActions } from "../../store/sort";
 import { OrderKey, orderTypes } from "../../types/OrderTypes";
 
 export const NavBar: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { value: orderValue } = useSelector((state: RootState) => state.sort);
-  const { value: searchedValue } = useSelector(
+  const { value: orderValue } = useAppSelector(
+    (state: RootState) => state.sort
+  );
+  const { value: searchedValue } = useAppSelector(
     (state: RootState) => state.search
   );
 
@@ -73,7 +74,9 @@ export const NavBar: FC = () => {
               </Nav>
               <Nav>
                 <NavDropdown
-                  title={orderValue ? orderTypes[orderValue as OrderKey] : "Order By"}
+                  title={
+                    orderValue ? orderTypes[orderValue as OrderKey] : "Order By"
+                  }
                   onSelect={(e) => orderHandler(e)}
                   menuVariant="dark"
                   align="end"
