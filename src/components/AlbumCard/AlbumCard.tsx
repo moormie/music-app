@@ -3,20 +3,29 @@ import "./styles.css";
 import { Card, Col, Row } from "react-bootstrap";
 import { AlbumData } from "../../types/AlbumData";
 import { BsHeart, BsThreeDots, BsHeartFill } from "react-icons/bs";
-import { useFavoriteAlbumListContext } from "../../contexts/FavoriteAlbumListContext";
 import { AlbumDetailModal } from "../AlbumDetailModal";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { favoritesActions } from "../../store/favorites";
+import { RootState } from "../../store";
 
 interface AlbumCardProps {
   album: AlbumData;
 }
 
 export const AlbumCard: FC<AlbumCardProps> = ({ album }) => {
-  const { favoriteAlbumList, onSetFavorite } = useFavoriteAlbumListContext();
+  const dispatch = useAppDispatch();
+  const { values: favoriteAlbumList } = useAppSelector(
+    (state: RootState) => state.favorites
+  );
 
   const [selectedAlbum, setSelectedAlbum] = useState<AlbumData>();
 
   const onSelectAlbum = (selected: AlbumData) => {
     setSelectedAlbum(selected);
+  };
+
+  const addToFavorites = (album: AlbumData) => {
+    dispatch(favoritesActions.selectFavorite(album));
   };
 
   const onClose = () => {
@@ -25,7 +34,7 @@ export const AlbumCard: FC<AlbumCardProps> = ({ album }) => {
 
   const isFavorite = useMemo(
     () => (favoriteAlbumList.find((a) => a.id === album.id) ? true : false),
-    [favoriteAlbumList, album.id],
+    [favoriteAlbumList, album.id]
   );
 
   return (
@@ -49,12 +58,12 @@ export const AlbumCard: FC<AlbumCardProps> = ({ album }) => {
               {isFavorite ? (
                 <BsHeartFill
                   className="album-icon"
-                  onClick={() => onSetFavorite(album.id)}
+                  onClick={() => addToFavorites(album)}
                 />
               ) : (
                 <BsHeart
                   className="album-icon"
-                  onClick={() => onSetFavorite(album.id)}
+                  onClick={() => addToFavorites(album)}
                 />
               )}
             </Col>
@@ -69,7 +78,7 @@ export const AlbumCard: FC<AlbumCardProps> = ({ album }) => {
           album={selectedAlbum}
           handleClose={onClose}
           isFavorite={isFavorite}
-          onSetFavorite={onSetFavorite}
+          onSetFavorite={addToFavorites}
         />
       )}
     </>

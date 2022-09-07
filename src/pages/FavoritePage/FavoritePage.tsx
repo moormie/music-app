@@ -3,11 +3,13 @@ import { Button, Container } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { ROUTES_HOME } from "../../App";
 import { AlbumCardList } from "../../components/AlbumCardList";
-import { useFavoriteAlbumListContext } from "../../contexts/FavoriteAlbumListContext";
+import { useAppSelector } from "../../hooks/hooks";
+import { RootState } from "../../store";
 
 export const FavoritesPage: FC = () => {
-  const { favoriteAlbumList } = useFavoriteAlbumListContext();
-
+  const { values: favoriteAlbumList } = useAppSelector(
+    (state: RootState) => state.favorites
+  );
   const history = useHistory();
 
   const goToHomePage = () => {

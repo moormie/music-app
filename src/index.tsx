@@ -7,7 +7,6 @@ import { BrowserRouter } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AlbumListProvider } from "./contexts/AlbumListContext";
-import { FavoriteAlbumListProvider } from "./contexts/FavoriteAlbumListContext";
 
 import { Provider } from "react-redux";
 import { store } from "./store";
@@ -19,11 +18,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-          <AlbumListProvider>
-            <FavoriteAlbumListProvider>
-              <App />
-            </FavoriteAlbumListProvider>
-          </AlbumListProvider>
+        <AlbumListProvider>
+          <App />
+        </AlbumListProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

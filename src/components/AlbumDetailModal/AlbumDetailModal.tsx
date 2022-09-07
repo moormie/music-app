@@ -17,7 +17,7 @@ interface AlbumDetailModalProps {
   handleClose: () => void;
   album: AlbumData;
   isFavorite: boolean;
-  onSetFavorite: (id: string) => void;
+  onSetFavorite: (album: AlbumData) => void;
 }
 
 export const AlbumDetailModal: FC<AlbumDetailModalProps> = ({
@@ -57,7 +57,7 @@ export const AlbumDetailModal: FC<AlbumDetailModalProps> = ({
       </Modal.Body>
       <ModalFooter
         isFavorite={isFavorite}
-        onSetFavorite={() => onSetFavorite(album.id)}
+        onSetFavorite={() => onSetFavorite(album)}
         artistLink={album.artistLink}
         albumLink={album.albumLink}
       />
