@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter basename="/music-app">
+      <BrowserRouter>
         <AlbumListProvider>
           <App />
         </AlbumListProvider>
